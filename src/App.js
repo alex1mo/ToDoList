@@ -19,11 +19,13 @@ class App extends Component {
     return () => this.setState({ openField: value });
   }.bind(this);
 
+  helperAdd = task => {
+    this.state.tasks.push(task);
+    return this.state.tasks;
+  };
+
   addTask = task => () => {
-    this.setState(() => {
-      this.state.tasks.push(task);
-      console.log(this);
-    });
+    this.setState({ tasks: this.helperAdd(task) });
   };
 
   render() {
