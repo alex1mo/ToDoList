@@ -8,11 +8,12 @@ export default class Task extends Component {
 
   render() {
     let { checked } = this.state;
+    let { index, data } = this.props;
 
     return (
-      <ListItem className="task" button dense>
+      <ListItem className="task" button dense index={index}>
         <Checkbox checked={checked} />
-        <ListItemText primary={"text"} />
+        <ListItemText primary={data.text} />
       </ListItem>
     );
   }
