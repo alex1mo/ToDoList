@@ -6,8 +6,8 @@ import Header from "./Components/Header";
 
 import Navigator from "./Components/List/Navigator";
 import List from "./Components/List";
-import ButtonAddTask from "./Components/List/Button_add_task";
-import FieldAddTask from "./Components/Field_add_task";
+import ButtonAddTask from "./Components/Button_add_task";
+import FieldAddTask from "./Components/Button_add_task/Field_add_task";
 
 class App extends Component {
   state = {
