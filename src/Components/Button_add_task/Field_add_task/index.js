@@ -34,7 +34,11 @@ class FieldAddTask extends Component {
           className="btn"
           variant="contained"
           color="primary"
-          onClick={addTask({ text })}
+          onClick={addTask({
+            text,
+            status: false,
+            date: new Date().toLocaleString()
+          })}
         >
           Добавить
         </Button>
