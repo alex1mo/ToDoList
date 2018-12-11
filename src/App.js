@@ -15,27 +15,39 @@ class App extends Component {
     colum: 0
   };
 
+  componentDidMount() {
+    let tasks = localStorage.getItem("APP_TODO_LIST");
+    if (tasks) {
+      this.setState({
+        tasks: JSON.parse(tasks)
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
+  }
+
   setStatus = function(value) {
     return () => this.setState({ openField: value });
   }.bind(this);
 
   addTask = task => () => {
-    this.setState({
-      openField: !this.state.openField,
-      tasks: [...this.state.tasks, task]
-    });
+    let tasks = [...this.state.tasks, task];
+    this.setState(
+      {
+        openField: !this.state.openField,
+        tasks: tasks
+      },
+      localStorage.setItem("APP_TODO_LIST", JSON.stringify(tasks))
+    );
   };
 
   newStatus = (status, index) => () => {
+    let buffer = [...this.state.tasks];
+    buffer[index].status = status;
     this.setState({
-      tasks: this.state.tasks.map((e, i) => {
-        if (i === index) {
-          e.status = status;
-          return e;
-        } else {
-          return e;
-        }
-      })
+      tasks: [...buffer]
     });
   };
 
@@ -56,7 +68,11 @@ class App extends Component {
         <List tasks={tasks} newStatus={this.newStatus} colum={colum} />
         <ButtonAddTask open={openField} setStatus={this.setStatus} />
         {openField && (
-          <FieldAddTask label="Добавить задание" addTask={this.addTask} />
+          <FieldAddTask
+            tasks={tasks}
+            label="Добавить задание"
+            addTask={this.addTask}
+          />
         )}
       </div>
     );

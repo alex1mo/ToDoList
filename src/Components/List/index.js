@@ -19,9 +19,7 @@ export default class List extends Component {
                   return true;
               }
             })
-            .map((e, i) => (
-              <Task key={i} index={i} data={e} newStatus={newStatus} />
-            ))}
+            .map((e, i) => <Task key={i} data={e} newStatus={newStatus} />)}
       </section>
     );
   }

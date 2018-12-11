@@ -1,6 +1,5 @@
 .field_add_task {
-  margin-top: 20px;
-  display: flex;
+  margin: 20px 0;
 }
 
 .field_add_task > .btn {
