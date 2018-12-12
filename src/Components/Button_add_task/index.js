@@ -4,10 +4,11 @@ import "./index.css";
 
 export default class ButtonAddTask extends Component {
   render() {
-    let { open, setStatus } = this.props;
+    let { open } = this.props;
+
     return (
       <div className="btn add_task">
-        <Fab size={"large"} onClick={setStatus(!open)} className="add_task">
+        <Fab size={"large"} className="add_task">
           {open ? "-" : "+"}
         </Fab>
       </div>

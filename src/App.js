@@ -29,28 +29,14 @@ class App extends Component {
       window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
   }
 
-  setStatus = function(value) {
-    return () => this.setState({ openField: value });
-  }.bind(this);
+  reloadTasks = function(tasks) {
+    localStorage.setItem("APP_TODO_LIST", JSON.stringify(tasks));
 
-  addTask = task => () => {
-    let tasks = [...this.state.tasks, task];
-    this.setState(
-      {
-        openField: !this.state.openField,
-        tasks: tasks
-      },
-      localStorage.setItem("APP_TODO_LIST", JSON.stringify(tasks))
-    );
-  };
-
-  newStatus = (status, index) => () => {
-    let buffer = [...this.state.tasks];
-    buffer[index].status = status;
     this.setState({
-      tasks: [...buffer]
+      openField: this.state.openField && !this.state.openField,
+      tasks
     });
-  };
+  }.bind(this);
 
   colum = value => {
     this.setState({
@@ -65,14 +51,20 @@ class App extends Component {
       <div className="App">
         <Header />
         <br />
+
         <Navigator colum={this.colum} />
-        <List tasks={tasks} newStatus={this.newStatus} colum={colum} />
-        <ButtonAddTask open={openField} setStatus={this.setStatus} />
+        <List tasks={tasks} reloadTasks={this.reloadTasks} colum={colum} />
+        <ButtonAddTask
+          open={openField}
+          openField={openField}
+          reloadTasks={this.reloadTasks}
+          tasks={tasks}
+        />
         {openField && (
           <FieldAddTask
             tasks={tasks}
             label="Добавить задание"
-            addTask={this.addTask}
+            reloadTasks={this.reloadTasks}
           />
         )}
       </div>

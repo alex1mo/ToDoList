@@ -8,8 +8,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
 
 export default class Task extends Component {
+  newStatus = (status, index) => {
+    return () => {
+      let buffer = [...this.props.tasks];
+      buffer[index].status = status;
+      this.props.reloadTasks(buffer);
+    };
+  };
+
   render() {
-    let { data, newStatus } = this.props;
+    let { data } = this.props;
 
     return (
       <ListItem
@@ -17,7 +25,7 @@ export default class Task extends Component {
         button
         dense
         index={data.index}
-        onClick={newStatus(!data.status, data.index)}
+        onClick={this.newStatus(!data.status, data.index)}
       >
         <Checkbox checked={data.status} />
         <ListItemText

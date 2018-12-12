@@ -5,7 +5,7 @@ import "./index.css";
 
 export default class List extends Component {
   render() {
-    let { tasks, newStatus, colum } = this.props;
+    let { tasks, colum, reloadTasks } = this.props;
 
     return (
       <section className="list">
@@ -21,7 +21,9 @@ export default class List extends Component {
                   return true;
               }
             })
-            .map((e, i) => <Task key={i} data={e} newStatus={newStatus} />)}
+            .map((e, i) => (
+              <Task key={i} data={e} tasks={tasks} reloadTasks={reloadTasks} />
+            ))}
       </section>
     );
   }

@@ -22,8 +22,16 @@ class FieldAddTask extends Component {
     this.setState({ deadline: e.target.value });
   };
 
+  addTask = task => {
+    return () => {
+      let tasks = this.props.tasks;
+      tasks = [...tasks, task];
+      this.props.reloadTasks(tasks);
+    };
+  };
+
   render() {
-    let { label, addTask, tasks } = this.props;
+    let { label, tasks } = this.props;
     let { text, deadline } = this.state;
 
     return (
@@ -46,7 +54,7 @@ class FieldAddTask extends Component {
           className="btn"
           variant="contained"
           color="primary"
-          onClick={addTask({
+          onClick={this.addTask({
             text,
             deadline,
             status: false,
