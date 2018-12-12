@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Tabs, Tab } from "@material-ui/core/";
 
+// import "./index.css";
+
 class Navigator extends Component {
   state = {
     val: 0

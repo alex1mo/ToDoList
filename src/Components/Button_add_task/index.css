@@ -2,3 +2,9 @@
   text-align: end;
   margin: 20px;
 }
+
+.btn.add_task .add_task {
+  background-color: #3f51b5;
+  font-size: 30px;
+  color: white;
+}

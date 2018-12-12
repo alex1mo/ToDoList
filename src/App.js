@@ -25,7 +25,8 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
+    this.state.openField &&
+      window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
   }
 
   setStatus = function(value) {

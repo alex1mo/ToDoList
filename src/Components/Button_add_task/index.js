@@ -7,7 +7,7 @@ export default class ButtonAddTask extends Component {
     let { open, setStatus } = this.props;
     return (
       <div className="btn add_task">
-        <Fab size={"medium"} onClick={setStatus(!open)}>
+        <Fab size={"large"} onClick={setStatus(!open)} className="add_task">
           {open ? "-" : "+"}
         </Fab>
       </div>

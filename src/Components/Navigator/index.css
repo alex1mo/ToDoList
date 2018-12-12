@@ -1,0 +1,5 @@
+#root > div > div.MuiTabs-root-1 {
+  position: fixed;
+  z-index: 1;
+  background: white;
+}

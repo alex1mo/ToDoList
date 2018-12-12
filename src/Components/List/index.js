@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Task from "./Task";
 
+import "./index.css";
+
 export default class List extends Component {
   render() {
     let { tasks, newStatus, colum } = this.props;
