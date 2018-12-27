@@ -12,7 +12,8 @@ class App extends Component {
   state = {
     openField: false,
     tasks: [],
-    colum: 0
+    colum: 0,
+    index: null
   };
 
   componentDidMount() {
@@ -22,19 +23,15 @@ class App extends Component {
         tasks: JSON.parse(tasks)
       });
     }
+    window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
   }
 
-  componentDidUpdate() {
-    this.state.openField &&
-      window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
-  }
-
-  reloadTasks = function(tasks) {
+  reloadTasks = function(tasks, open, index) {
     localStorage.setItem("APP_TODO_LIST", JSON.stringify(tasks));
-
     this.setState({
-      openField: this.state.openField && !this.state.openField,
-      tasks
+      openField: open,
+      tasks,
+      index
     });
   }.bind(this);
 
@@ -45,8 +42,7 @@ class App extends Component {
   };
 
   render() {
-    let { openField, tasks, colum } = this.state;
-
+    let { openField, tasks, colum, index } = this.state;
     return (
       <div className="App">
         <Header />
@@ -65,6 +61,8 @@ class App extends Component {
             tasks={tasks}
             label="Добавить задание"
             reloadTasks={this.reloadTasks}
+            openField={openField}
+            index={index}
           />
         )}
       </div>

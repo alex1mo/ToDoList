@@ -14,6 +14,10 @@ class FieldAddTask extends Component {
     deadline: null
   };
 
+  componentDidMount() {
+    window.scrollTo(0, parseFloat(getComputedStyle(document.body).height));
+  }
+
   pullText = e => {
     this.setState({ text: e.target.value });
   };
@@ -26,18 +30,24 @@ class FieldAddTask extends Component {
     return () => {
       let tasks = this.props.tasks;
       tasks = [...tasks, task];
-      this.props.reloadTasks(tasks);
+      this.props.reloadTasks(tasks, !this.props.openField);
     };
   };
 
+  editTask = (text, index) => () => {
+    this.props.tasks[index].text = text;
+    this.props.reloadTasks(this.props.tasks, !this.props.openField, null);
+  };
+
   render() {
-    let { label, tasks } = this.props;
+    let { label, tasks, index } = this.props;
     let { text, deadline } = this.state;
 
     return (
       <div className="field_add_task">
         <TextField
           label={label}
+          defaultValue={(index || "") && tasks[index].text}
           variant="outlined"
           id="custom-css-outlined-input"
           fullWidth={true}
@@ -54,15 +64,19 @@ class FieldAddTask extends Component {
           className="btn"
           variant="contained"
           color="primary"
-          onClick={this.addTask({
-            text,
-            deadline,
-            status: false,
-            date: new Date().toLocaleString(),
-            index: tasks.length
-          })}
+          onClick={
+            index
+              ? this.editTask(text, index)
+              : this.addTask({
+                  text,
+                  deadline,
+                  status: false,
+                  date: new Date().toLocaleString(),
+                  index: tasks.length
+                })
+          }
         >
-          Добавить
+          {index !== undefined ? "Редактировать" : "Добавить"}
         </Button>
       </div>
     );

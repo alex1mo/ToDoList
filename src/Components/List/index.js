@@ -4,6 +4,7 @@ import Task from "./Task";
 import "./index.css";
 
 export default class List extends Component {
+  componentDidMount() {}
   render() {
     let { tasks, colum, reloadTasks } = this.props;
 
