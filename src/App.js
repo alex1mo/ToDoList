@@ -43,6 +43,7 @@ class App extends Component {
 
   render() {
     let { openField, tasks, colum, index } = this.state;
+
     return (
       <div className="App">
         <Header />

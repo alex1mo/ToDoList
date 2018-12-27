@@ -42,12 +42,13 @@ class FieldAddTask extends Component {
   render() {
     let { label, tasks, index } = this.props;
     let { text, deadline } = this.state;
+    console.log(index);
 
     return (
       <div className="field_add_task">
         <TextField
           label={label}
-          defaultValue={(index || "") && tasks[index].text}
+          defaultValue={(index >= 0 || "") && tasks[index].text}
           variant="outlined"
           id="custom-css-outlined-input"
           fullWidth={true}
