@@ -42,7 +42,6 @@ class FieldAddTask extends Component {
   render() {
     let { label, tasks, index } = this.props;
     let { text, deadline } = this.state;
-    console.log(index);
 
     return (
       <div className="field_add_task">
@@ -66,7 +65,7 @@ class FieldAddTask extends Component {
           variant="contained"
           color="primary"
           onClick={
-            index
+            index || index === 0
               ? this.editTask(text, index)
               : this.addTask({
                   text,
